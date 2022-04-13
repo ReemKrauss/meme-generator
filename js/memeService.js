@@ -1,5 +1,9 @@
 'use strict'
 let gMeme
+let gCurrFill = 'white'
+let gCurrStroke = 'black'
+let gCurrFont = 'impact'
+
 
 
 
@@ -12,7 +16,6 @@ function resetMemeValues() {
             txt: 'Your text',
             font: 'impact',
             align: 'center',
-            color: 'white',
             fill: 'white',
             stroke: 'black',
             size: 40,
@@ -22,7 +25,6 @@ function resetMemeValues() {
             txt: 'Your text',
             font: 'impact',
             align: 'center',
-            color: 'white',
             fill: 'white',
             stroke: 'black',
             size: 40,
@@ -38,9 +40,8 @@ function getMeme() {
     return gMeme
 }
 
-function updateMemeTxt(txt, canvasW, canvasH, color, font) {
+function updateLineTxt(txt) {
     if (gMeme.selectedLine < 0) {
-        addNewLine(canvasW, canvasH, color, font);
         gMeme.selectedLine = gMeme.lines.length - 1;
     }
     gMeme.lines[gMeme.selectedLine].txt = txt;
@@ -51,16 +52,15 @@ function toggleLines() {
     if (!gMeme.lines.length) return;
     if (gMeme.selectedLine === gMeme.lines.length - 1) {
         gMeme.selectedLine = 0;
-        document.querySelector('[name=meme-line]').value = gMeme.lines[gMeme.selectedLine].txt;
-        return;
+        return gMeme.lines[gMeme.selectedLine].txt;
     }
     gMeme.selectedLine++;
-    document.querySelector('[name=meme-line]').value = gMeme.lines[gMeme.selectedLine].txt;
+    return gMeme.lines[gMeme.selectedLine].txt;
 }
 
-function deleteEmptyLine(){
-    console.log(gMeme.lines[gMeme.selectedLine].txt);
-    if(!gMeme.lines[gMeme.selectedLine].txt){
+function deleteEmptyLine() {
+    if (!gMeme.lines.length) return
+    if (!gMeme.lines[gMeme.selectedLine].txt) {
         deleteLine()
     }
 }
@@ -75,7 +75,7 @@ function deleteLine() {
             return;
         }
     }
-    
+
     gMeme.selectedLine = gMeme.lines.length - 1;
 }
 
@@ -92,21 +92,61 @@ function addNewLine(canvasW, canvasH) {
 function createNewLine(canvasW, canvasH) {
     let y = 55;
     const linesCount = gMeme.lines.length;
-    if (linesCount === 1){
+    if (linesCount === 1) {
         y = 360;
-        if(gMeme.lines[0].pos.y === 360)y = 55
+        if (gMeme.lines[0].pos.y === 360) y = 55
     }
     if (linesCount > 1) y = canvasH / 2;
     const newLine = {
         txt: 'Your text',
-        font: 'impact',
+        font: gCurrFont,
         align: 'center',
-        color: 'white',
-        fill: 'white',
-        stroke: 'black',
+        fill: gCurrFill,
+        stroke: gCurrStroke,
         size: 40,
         pos: { x: canvasW / 2, y },
-        selectedPos: { x: 0, y: 0 }
     };
     return newLine;
+}
+
+function moveLine(val) {
+    var idx = gMeme.selectedLine;
+    // val *= 6;
+    console.log(val);
+    if (idx >= 0) {
+        gMeme.lines[idx].pos.y += val;
+        return;
+    }
+}
+
+function changeFontSize(size) {
+    const idx = gMeme.selectedLine
+    const currLine = gMeme.lines[idx]
+    if (idx < 0) return;
+    if (size > 0 && currLine.size > 100) return
+    if (size < 0 && currLine.size < 10) return
+    gMeme.lines[idx].size += size
+}
+
+function changeAlign(key, canvasW) {
+    var idx = gMeme.selectedLine;
+    if (idx < 0) return;
+    const line = gMeme.lines[idx];
+    line.align = key;
+    if (key === 'left') line.pos.x = 10;
+    else if (key === 'right') line.pos.x = canvasW - 10;
+    else line.pos.x = canvasW / 2;
+}
+
+function setColor(color) {
+    gCurrFill = color
+    const idx = gMeme.selectedLine;
+    if (idx < 0) return;
+    gMeme.lines[idx].fill = color;
+}
+function changeFont(val){
+    gCurrFont = val
+    const idx = gMeme.selectedLine;
+    if (idx < 0) return;
+    gMeme.lines[idx].font = val;
 }

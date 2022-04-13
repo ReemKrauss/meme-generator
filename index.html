@@ -23,7 +23,7 @@
             <canvas id="main-canvas" width="400" height="400"></canvas>
            
             <div class="main-editor">
-                    <input type="text" class="meme-line" name="meme-line" oninput="editMemeLine(this.value)"/> 
+                    <input type="text" class="meme-line" name="meme-line" oninput="onupdteLineTxt(this.value)"/> 
                 <div class="edit-lines">
                     <button class="edit-button" onclick="onToggleLines()">⇅</button>
                     <button class="edit-button" onclick="onMoveLines('up')">⇡</button>
@@ -38,7 +38,13 @@
                      <button class="edit-button" onclick="onChangeAlign('left')">∈</button>
                      <button class="edit-button" onclick="onChangeAlign('center')">≡</button>
                      <button class="edit-button" onclick="onChangeAlign('right')">∋</button>
-                    <button class="edit-button fill"><input type="color" onchange="onSelectColor(this.value)" /></button>
+                    <select class="edit-button" name="font" onclick="onChangeFont(this.value)">
+                        <option value="impact" selected>impact</option>
+                        <option value="arial">arial</option>
+                        <option value="cursive">cursive</option>
+                        <option value="math">math</option>
+                    </select>
+                    <button class="edit-button fill"><input type="color" value="#ffffff" oninput="onSelectColor(this.value)" /></button>
                     </div>
             </div> 
             
