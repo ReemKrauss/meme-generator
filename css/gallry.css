@@ -1,0 +1,11 @@
+.gallery-container{
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    background-color: #e3e3e3 ;
+    display: flex;
+    justify-content: center;
+}
+
+.gallery-imgs{
+    width: 90%;
+}

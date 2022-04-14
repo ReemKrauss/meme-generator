@@ -32,6 +32,7 @@ function updateLineTxt(txt) {
 
 function toggleLines() {
     deleteEmptyLine()
+    if(gMeme.selectedLine===-1)return null
     if (!gMeme.lines.length) return;
     if (gMeme.selectedLine === gMeme.lines.length - 1) {
         gMeme.selectedLine = 0;
@@ -67,26 +68,26 @@ function addNewLine(canvasW, canvasH) {
     deleteEmptyLine()
     let linesCount = gMeme.lines.length;
     const rectVal = getRectValue('Your text')
-    const newLine = createNewLine(canvasW, canvasH,rectVal);
+    const newLine = createNewLine(canvasW, canvasH, rectVal);
     gMeme.lines.push(newLine);
     gMeme.selectedLine = linesCount++;
-    setLineRectPos()
+    // setLineRectPos()
 }
 
-function setLineRectPos(){
+function setLineRectPos() {
     const idx = gMeme.selectedLine;
     const textWidth = getRectValue(gMeme.lines[idx].txt)
     const textHight = gMeme.lines[idx].size
     const rectsize = {
-        x:gMeme.lines[idx].pos.x - textWidth / 2 - 10,
-        y:gMeme.lines[idx].pos.y - textHight,
-        width:textWidth + 20,
-        higth: textHight + (textHight/4 ),
+        x: gMeme.lines[idx].pos.x - textWidth / 2 - 10,
+        y: gMeme.lines[idx].pos.y - textHight,
+        width: textWidth + 20,
+        higth: textHight + (textHight / 4),
     }
     gMeme.lines[idx].rectPos = rectsize
 }
 
-function createNewLine(canvasW, canvasH,rectVal) {
+function createNewLine(canvasW, canvasH) {
     let y = 55;
     const linesCount = gMeme.lines.length;
     if (linesCount === 1) {
@@ -102,8 +103,8 @@ function createNewLine(canvasW, canvasH,rectVal) {
         stroke: gCurrStroke,
         size: 40,
         pos: { x: canvasW / 2, y },
-        isClick: false,
-        rectPos:0, 
+        isDrag: false,
+        rectPos: 0,
     };
     return newLine;
 }
@@ -112,7 +113,7 @@ function moveLine(val) {
     const idx = gMeme.selectedLine;
     if (idx >= 0) {
         gMeme.lines[idx].pos.y += val;
-        setLineRectPos()
+        // setLineRectPos()
         return;
     }
 }
@@ -124,27 +125,38 @@ function changeFontSize(size) {
     if (size > 0 && currLine.size > 100) return
     if (size < 0 && currLine.size < 10) return
     gMeme.lines[idx].size += size
-    setLineRectPos()
+    // setLineRectPos()
 }
 
-function changeAlign(key, canvasW) {
+function changeAlign(val) {
+    const idx = gMeme.selectedLine;
+    if (idx >= 0) {
+        gMeme.lines[idx].pos.x += val;
+        // setLineRectPos()
+        return;
+    }
+}
+
+function changeAlignCenter(canvasW) {
     var idx = gMeme.selectedLine;
     if (idx < 0) return;
-    const line = gMeme.lines[idx];
-    line.align = key;
-    if (key === 'left') line.pos.x = 10;
-    else if (key === 'right') line.pos.x = canvasW - 10;
-    else line.pos.x = canvasW / 2;
-    setLineRectPos()
+    gMeme.lines[idx].pos.x = canvasW / 2;
+    // setLineRectPos()
 }
 
-function setColor(color) {
+function setColorFill(color) {
     gCurrFill = color
     const idx = gMeme.selectedLine;
     if (idx < 0) return;
     gMeme.lines[idx].fill = color;
 }
-function changeFont(val){
+function setColorStroke(color) {
+    gCurrStroke = color
+    const idx = gMeme.selectedLine;
+    if (idx < 0) return;
+    gMeme.lines[idx].stroke = color;
+}
+function changeFont(val) {
     gCurrFont = val
     const idx = gMeme.selectedLine;
     if (idx < 0) return;
@@ -154,6 +166,36 @@ function changeFont(val){
 function getRectValue(txt) {
     return gCtx.measureText(txt).width;
 }
-function getSelectedLine(){
+function getSelectedLine() {
+    if(gMeme.selectedLine===-1)return null
     return gMeme.lines[gMeme.selectedLine]
+}
+
+function isLineClicked(pos) {
+    return gMeme.lines.find((line, idx) => {
+        const rectPos = line.rectPos
+        if (pos.x > rectPos.x &&
+            pos.x < rectPos.x + rectPos.width &&
+            pos.y > rectPos.y &&
+            pos.y < rectPos.y + rectPos.higth) {
+            gMeme.selectedLine = idx
+            return true
+        }
+
+    });
+}
+
+function setlineDrag(val) {
+    if(gMeme.selectedLine===-1)return null
+    const idx = gMeme.selectedLine;
+    gMeme.lines[idx].isDrag = val
+}
+
+function moveLinePos(dx, dy) {
+    const idx = gMeme.selectedLine;
+    gMeme.lines[idx].pos.x += dx
+    gMeme.lines[idx].pos.y += dy
+}
+function delSelctedLine(){
+    gMeme.selectedLine = -1
 }

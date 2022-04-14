@@ -10,7 +10,10 @@
 </head>
 <body  onload="init()">
     <header>
-        <img class="logo" src="img/LOGO.png" onclick="swicthContent()"/>
+        <div class="header-logo">
+            <img class="logo" src="img/LOGO.png" onclick="swicthContent()"/>
+        </div>
+        <span class="header-btn" onclick="swicthContent()">gallerry</span>
     </header>
 
     <main>
@@ -20,10 +23,12 @@
 
 
         <section class="meme-container hidden">
-            <canvas id="main-canvas" width="400" height="400"></canvas>
+            <div class="canvas">
+                <canvas id="main-canvas" width="400" height="400"></canvas>
+            </div>
            
             <div class="main-editor">
-                    <input type="text" class="meme-line" name="meme-line" oninput="onupdteLineTxt(this.value)"/> 
+                    <input type="text" class="meme-line"  oninput="onupdteLineTxt(this.value)"/> 
                 <div class="edit-lines">
                     <button class="edit-button" onclick="onToggleLines()">⇅</button>
                     <button class="edit-button" onclick="onMoveLines('up')">⇡</button>
@@ -35,20 +40,32 @@
                     <div class="edit-text">
                      <button class="edit-button" onclick="onChangeFontSize('+')">A+</button>
                      <button class="edit-button" onclick="onChangeFontSize('-')">A-</button>
-                     <button class="edit-button" onclick="onChangeAlign('left')">∈</button>
+                     <button class="edit-button" onclick="onChangeAlign('left')">←</button>
                      <button class="edit-button" onclick="onChangeAlign('center')">≡</button>
-                     <button class="edit-button" onclick="onChangeAlign('right')">∋</button>
-                    <select class="edit-button" name="font" onclick="onChangeFont(this.value)">
+                     <button class="edit-button" onclick="onChangeAlign('right')">→</button>
+                     <br>
+                    <select class="fonts" name="font" onclick="onChangeFont(this.value)">
                         <option value="impact" selected>impact</option>
                         <option value="arial">arial</option>
                         <option value="cursive">cursive</option>
                         <option value="math">math</option>
                     </select>
-                    <button class="edit-button fill"><input type="color" value="#ffffff" oninput="onSelectColor(this.value)" /></button>
+                    <span>selcet fill:</span>
+                    <input class="edit-button color-btn" type="color" value="#ffffff" oninput="onSelectColorFill(this.value)" />
+                    <span>selcet stroke:</span>
+                    <input class="edit-button color-btn" type="color" value="#000000" oninput="onSelectColorStroke(this.value)" />
+                    <br>
+                    <button class="edit-button download-btn"onclick="onDownload()"><a class="download" href="#" >Download</a></button>
                     </div>
             </div> 
             
         </section>
+        <footer>
+            <div class="footer-logo">
+                <img class="logo" src="img/LOGO.png" onclick="swicthContent()"/>
+            </div>
+            <p>Coffeerigths</p>
+        </footer>
     </main>
 
 

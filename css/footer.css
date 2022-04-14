@@ -1,0 +1,13 @@
+footer{
+    padding-top: 3vh;
+    text-align: center;
+    height: 15vh;
+    background-color: #ff7f00;;
+}
+
+.footer-logo{
+    height: 3rem;
+} 
+footer p{
+    color: antiquewhite;
+}

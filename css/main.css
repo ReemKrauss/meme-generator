@@ -5,14 +5,9 @@ body{
    
     margin:0;
 }
-header{
-    background-color: #ff7f00;
-    height: 60px;
-}
 
-.gallery-container{
-    background-color: #e3e3e3 ;
-}    
+
+
 .logo{
     height: 100%;
 }

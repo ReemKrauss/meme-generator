@@ -7,10 +7,7 @@ function swicthContent() {
 }
 
 
-function addEvListeners() {
-    addMouseListeners()
-    addTouchListeners()
-}
+
 
 function addMouseListeners() {
     gCanvas.addEventListener('mousedown', onDown)
@@ -18,13 +15,14 @@ function addMouseListeners() {
     gCanvas.addEventListener('mouseup', onUp)
 }
 function addTouchListeners() {
-    // gElCanvas.addEventListener('touchmove', onMove)
-    // gElCanvas.addEventListener('touchstart', onDown)
-    // gElCanvas.addEventListener('touchend', onUp)
+    gCanvas.addEventListener('touchmove', onMove)
+    gCanvas.addEventListener('touchstart', onDown)
+    gCanvas.addEventListener('touchend', onUp)
 }
 function getEvPos(ev) {
-    var pos = {
+    const pos = {
         x: ev.offsetX,
         y: ev.offsetY
     }
+    return pos
 }
