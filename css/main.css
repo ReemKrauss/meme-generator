@@ -2,10 +2,12 @@
     box-sizing: border-box;
 }
 body{
-   
+    background-color:  #d7d9dc;
     margin:0;
 }
-
+html{
+    min-width: 320px;
+}
 
 
 .logo{

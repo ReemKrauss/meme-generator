@@ -91,8 +91,8 @@ function createNewLine(canvasW, canvasH) {
     let y = 55;
     const linesCount = gMeme.lines.length;
     if (linesCount === 1) {
-        y = 360;
-        if (gMeme.lines[0].pos.y === 360) y = 55
+        y = canvasH - 40;
+        if (gMeme.lines[0].pos.y === canvasH - 40) y = 55
     }
     if (linesCount > 1) y = canvasH / 2;
     const newLine = {

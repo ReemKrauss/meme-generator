@@ -1,22 +1,32 @@
 .meme-container{
-    height: 80vh;
-    padding-left: 5%;
-    padding-right: 5%;
+    min-height: 80vh;
+    /* padding-left: 5%;
+    padding-right: 5%; */
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+    background-color:  #d7d9dc;
 }
+
 .main-editor{
     display: flex;
     flex-direction: column;
+    gap: 3rem;
+}
+.edit-lines{
+    display: flex;
+    justify-content: space-between;
+}
+.edit-text{
+    display: flex;
+    justify-content: space-between;
 }
 .edit-button {
     border-radius: 10px;
     width: 55px;
     height: 55px;
     font-size: 21px;
-    margin: 5px;
-    background-color: #d7d9dc;
+    background-color: #ffffff;
 }
 .edit-button:hover{
     cursor: pointer;
@@ -31,8 +41,7 @@
     width: 100px;
     height: 40px;
     font-size: 21px;
-    margin: 5px;
-    background-color: #d7d9dc;
+    background-color: #ffffff;
 }
 .fonts:hover{
     cursor: pointer;
@@ -47,6 +56,35 @@
 .download-btn{
     width: 110px;
     height: 30px;
+    background-color: #ff7f00;
 }
 
+.meme-line {
+    display: block;
+    background-color: #ffffff;
+    font-size: 20px;
+    padding: 15px 0;
+    border-radius: 3em;
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: center;
+    border: 5px outset;
+}
 
+.meme-line input[type="text"]:focus-visible{
+    padding: 0;
+    outline: none;
+ }
+ 
+ @media (max-width: 980px) {
+     .meme-container{
+         flex-direction: column;
+     }
+     .main-editor{
+         gap: 0
+     }
+     .edit-button{
+         margin-top: 1.5vh;
+     }
+
+ }

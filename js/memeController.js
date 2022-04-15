@@ -17,6 +17,7 @@ function clickedImg(imgURL) {
     gCanvas = document.getElementById('main-canvas')
     gCtx = gCanvas.getContext('2d')
     addEvListeners()
+    resizeCanvas()
     renderMeme()
     onAddLine()
 }
@@ -26,12 +27,15 @@ function addEvListeners() {
     addTouchListeners()
     window.addEventListener('resize', () => {
         resizeCanvas()
+        
         renderMeme()
     })
 }
 function resizeCanvas() {
-    const elContainer = document.querySelector('.canvas')
-    gCanvas.width = elContainer.offsetWidth
+    let targetW = (window.innerWidth<980) ? window.innerWidth*0.6 : window.innerWidth*0.4
+    let width = Math.max(270,targetW)
+    gCanvas.width = width
+    gCanvas.height = gCanvas.width;
     // gCanvas.height = elContainer.offsetHeight
 }
 

@@ -24,7 +24,7 @@
 
         <section class="meme-container hidden">
             <div class="canvas">
-                <canvas id="main-canvas" width="400" height="400"></canvas>
+                <canvas id="main-canvas" width="100%" height="100%"></canvas>
             </div>
            
             <div class="main-editor">
@@ -43,7 +43,8 @@
                      <button class="edit-button" onclick="onChangeAlign('left')">←</button>
                      <button class="edit-button" onclick="onChangeAlign('center')">≡</button>
                      <button class="edit-button" onclick="onChangeAlign('right')">→</button>
-                     <br>
+                    </div>
+                    <div class="edit-color">
                     <select class="fonts" name="font" onclick="onChangeFont(this.value)">
                         <option value="impact" selected>impact</option>
                         <option value="arial">arial</option>
@@ -54,9 +55,8 @@
                     <input class="edit-button color-btn" type="color" value="#ffffff" oninput="onSelectColorFill(this.value)" />
                     <span>selcet stroke:</span>
                     <input class="edit-button color-btn" type="color" value="#000000" oninput="onSelectColorStroke(this.value)" />
-                    <br>
+                </div>
                     <button class="edit-button download-btn"onclick="onDownload()"><a class="download" href="#" >Download</a></button>
-                    </div>
             </div> 
             
         </section>
