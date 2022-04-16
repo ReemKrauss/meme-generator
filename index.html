@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,16 +9,21 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Meme genrator</title>
 </head>
-<body  onload="init()">
+
+<body onload="init()">
     <header>
         <div class="header-logo">
-            <img class="logo" src="img/LOGO.png" onclick="swicthContent()"/>
+            <img class="logo" src="img/LOGO.png" onclick="swicthContent()" />
         </div>
         <span class="header-btn" onclick="swicthContent()">gallerry</span>
     </header>
 
     <main>
         <section class="gallery-container">
+            <div>
+                <label class="choose-img" for="image" >Choose your own image</label>
+                <input type="file" class="file-input" name="image" id="image" onchange="onImgInput(event)" />
+            </div>
             <div class="gallery-imgs grid"></div>
         </section>
 
@@ -26,9 +32,9 @@
             <div class="canvas">
                 <canvas id="main-canvas" width="100%" height="100%"></canvas>
             </div>
-           
+
             <div class="main-editor">
-                    <input type="text" class="meme-line"  oninput="onupdteLineTxt(this.value)"/> 
+                <input type="text" class="meme-line" oninput="onupdteLineTxt(this.value)" />
                 <div class="edit-lines">
                     <button class="edit-button" onclick="onToggleLines()">⇅</button>
                     <button class="edit-button" onclick="onMoveLines('up')">⇡</button>
@@ -36,33 +42,44 @@
                     <button class="edit-button" onclick="onAddLine()">+</button>
                     <button class="edit-button" onclick="onDeleteLine()">❌</button>
                 </div>
-    
-                    <div class="edit-text">
-                     <button class="edit-button" onclick="onChangeFontSize('+')">A+</button>
-                     <button class="edit-button" onclick="onChangeFontSize('-')">A-</button>
-                     <button class="edit-button" onclick="onChangeAlign('left')">←</button>
-                     <button class="edit-button" onclick="onChangeAlign('center')">≡</button>
-                     <button class="edit-button" onclick="onChangeAlign('right')">→</button>
-                    </div>
-                    <div class="edit-color">
-                    <select class="fonts" name="font" onclick="onChangeFont(this.value)">
+
+                <div class="edit-text">
+                    <button class="edit-button" onclick="onChangeFontSize('+')">A+</button>
+                    <button class="edit-button" onclick="onChangeFontSize('-')">A-</button>
+                    <button class="edit-button" onclick="onChangeAlign('left')">←</button>
+                    <button class="edit-button" onclick="onChangeAlign('center')">≡</button>
+                    <button class="edit-button" onclick="onChangeAlign('right')">→</button>
+                </div>
+                <div class="fonts-container">
+                    <select class="fonts edit-button" name="font" onclick="onChangeFont(this.value)">
                         <option value="impact" selected>impact</option>
                         <option value="arial">arial</option>
                         <option value="cursive">cursive</option>
                         <option value="math">math</option>
                     </select>
-                    <span>selcet fill:</span>
-                    <input class="edit-button color-btn" type="color" value="#ffffff" oninput="onSelectColorFill(this.value)" />
-                    <span>selcet stroke:</span>
-                    <input class="edit-button color-btn" type="color" value="#000000" oninput="onSelectColorStroke(this.value)" />
                 </div>
-                    <button class="edit-button download-btn"onclick="onDownload()"><a class="download" href="#" >Download</a></button>
-            </div> 
-            
+                <div class="edit-color">
+                    <span>selcet fill:</span>
+                    <input class="edit-button color-btn" type="color" value="#ffffff"
+                        oninput="onSelectColorFill(this.value)" />
+                    <span>selcet stroke:</span>
+                    <input class="edit-button color-btn" type="color" value="#000000"
+                        oninput="onSelectColorStroke(this.value)" />
+                </div>
+                <div class="export-btns">
+                    <a class="download edit-button download-btn" href="#" onclick="onDownload()">Download</a>
+                    <div class="share-container"></div>
+                    <a class="edit-button download-btn" href="#" onclick="onUploadImg()()">Upload</a>
+                </div>
+                <div class="share-modal">
+                    <div class="user-msg"></div>
+                </div>
+            </div>
+
         </section>
         <footer>
             <div class="footer-logo">
-                <img class="logo" src="img/LOGO.png" onclick="swicthContent()"/>
+                <img class="logo" src="img/LOGO.png" onclick="swicthContent()" />
             </div>
             <p>Coffeerigths</p>
         </footer>
@@ -77,4 +94,5 @@
     <script src="js/gallerryController.js"></script>
     <script src="js/memeController.js"></script>
 </body>
+
 </html>

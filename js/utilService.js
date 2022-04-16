@@ -2,8 +2,8 @@
 
 
 function swicthContent() {
-    document.querySelector('.gallery-container').classList.toggle('hidden');
-    document.querySelector('.meme-container').classList.toggle('hidden');
+    document.querySelector('.gallery-container').classList.toggle('hidden')
+    document.querySelector('.meme-container').classList.toggle('hidden')
 }
 
 
@@ -34,4 +34,24 @@ function getEvPos(ev) {
         }
     }
     return pos
+}
+
+
+function doUploadImg(imgDataUrl, onSuccess) {
+
+    const formData = new FormData()
+    formData.append('img', imgDataUrl)
+
+    fetch('//ca-upload.com/here/upload.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(res => res.text())
+        .then((url) => {
+            console.log('Got back live url:', url)
+            onSuccess(url)
+        })
+        .catch((err) => {
+            console.error(err)
+        })
 }
